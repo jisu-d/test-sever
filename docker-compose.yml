@@ -1,0 +1,15 @@
+version: '3.8' # Docker Compose 파일 형식 버전
+
+services:
+  mariadb:
+    image: mariadb:10.6 # 사용할 MariaDB 이미지 버전 (예: 10.6, 11.0 등)
+    container_name: mariadb-server # 컨테이너에 부여할 이름
+    ports:
+      - "3306:3306" # 라즈베리파이의 3306 포트를 컨테이너의 3306 포트로 연결
+    volumes:
+      - mariadb_data:/var/lib/mysql # 데이터 영속성을 위한 볼륨 마운트
+    env_file:
+      - ./mariadb/.env # mariadb/.env 파일에서 환경 변수를 로드
+
+volumes:
+  mariadb_data: # MariaDB 데이터 영속성을 위한 볼륨 정의
